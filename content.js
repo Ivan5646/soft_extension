@@ -1,12 +1,13 @@
 var processRemoteData = function processRemoteData(popupState) {
 
   let found = popupState.data.find(i => location.host.indexOf(i.domain) >= 0); // finding the required websites
-  console.log(found.domain);
   var website = found.domain;
   website = website.substring(0, website.indexOf(".")); // cut off domain zone 
-  var yandex = "yandex"; // remove
-  var closed = popupState.contentState.yandex.closed;
-  if (found && closed != true ) { // && closed != true  yandex == "yandex"
+  console.log("afer aubstring: " + website);
+  var closed = popupState.contentState[website].closed;
+  var count = popupState.contentState[website].count;
+  console.log(count);
+  if (found && !closed && count < 3 ) { // && closed != true  yandex == "yandex"
     var msgText = found.message;
     var div = $("<div>", {id: "myContainer", text: msgText});
     $(div).css({
