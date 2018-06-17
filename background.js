@@ -1,5 +1,20 @@
 let REQUEST_INTERVAL = 3600000;
 
+// contentState: {
+//     'google': {
+//         count: 0,
+//         closed: false
+//     },
+//     'yandex': {
+//         count: 0,
+//         closed: false
+//     },
+//     'bing': {
+//         count: 0,
+//         closed: false
+//     }
+// }
+
 let requestData = () => {
     setTimeout(() => {
         fetch('http://www.softomate.net/ext/employees/list.json')
@@ -8,27 +23,34 @@ let requestData = () => {
             )
             .then((result) =>
                 // the request is done succesfully
-                chrome.storage.local.set({
-                    'popupState': {
-                        data: result,
-                        pending: false,
-                        error: null,
-                        contentState: {
-                            'google': {
-                                count: 0,
-                                closed: false
-                            },
-                            'yandex': {
-                                count: 0,
-                                closed: false
-                            },
-                            'bing': {
-                                count: 0,
-                                closed: false
-                            }
+
+                // fill up the contentState
+                // check if there is a contentState already in Storage
+                chrome.storage.local.get('popupState', function(storageData) {
+                    if (!storageData.popupState.contentState) {
+                        contentState = {};
+                        for (var i =0; i<result.length; i++) {
+                            contentState[result[i].name] = {count: 0, closed: false};
                         }
-                    }
-                })
+                        chrome.storage.local.set({
+                            'popupState': {
+                                data: result,
+                                pending: false,
+                                error: null,
+                                contentState
+                            }
+                        })
+                    } 
+                    // else {
+                    //     chrome.storage.local.get('popupState', function(storageData) {
+                    //         chrome.storage.local.set({
+                    //             'popupState': storageData.popupState
+                    //         });
+                    //     });
+                    // }
+                    
+                });
+
             )
             .catch((error) =>
                 // the request is failed
@@ -45,6 +67,7 @@ let requestData = () => {
 
 requestData(); // request on the first load of the extension
 
+// update state
 chrome.extension.onMessage.addListener((request, sender, sendResponse) => {
     switch (request.msg) {
         case "refreshData":
