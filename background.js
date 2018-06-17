@@ -76,13 +76,13 @@ chrome.extension.onMessage.addListener((request, sender, sendResponse) => {
     });
     //console.log(result.popupState.contentState[request.website].closed);
   } 
-  // else if (request.msg === "visited") {
-  //   console.log("visited");
-  //   chrome.storage.local.get('popupState', function(result) {
-  //     result.popupState.contentState[request.website].count += 1;
-  //     chrome.storage.local.set({'popupState': result});
-  //   });
-  // }
+  else if (request.msg === "visited") {
+    console.log("visited");
+    chrome.storage.local.get('popupState', function(result) {
+      result.popupState.contentState[request.website].count += 1;
+      chrome.storage.local.set({'popupState': result.popupState});
+    });
+  }
 });
 
 setInterval(requestData, REQUEST_INTERVAL);
