@@ -53,7 +53,7 @@ var processRemoteData = function processRemoteData(popupState) {
       //   // }
       //   popupState.contentState[website].closed: true
       // });
-      chrome.extension.sendMessage({ msg: "closed"});
+      chrome.extension.sendMessage({ msg: "closed", website: website});
     });  
   });
 

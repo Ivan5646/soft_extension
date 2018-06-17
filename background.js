@@ -29,7 +29,7 @@ setTimeout( () => {fetch('http://www.softomate.net/ext/employees/list.json')
     .then((result) =>
       // the request is done succesfully
       chrome.storage.local.set({
-        popupState: {
+        'popupState': {
           data: result,
           pending: false,
           error: null, 
@@ -70,15 +70,13 @@ chrome.extension.onMessage.addListener((request, sender, sendResponse) => {
     requestData();
   }
   else if (request.msg === "closed") {
-    // chrome.storage.local.get('storageKey', function(result) {
-    //   //data.visited will be in the result object for a specific key. You can change data.visited 
-    //   //to be true here. After changing it to true you can save it again under 
-    //   //the key 'storageKey' or any key you like.
+    // Error in event handler for runtime.onMessage: ReferenceError: result is not defined
+    chrome.storage.local.get('popupState', function(result) {
+      result.popupState.contentState.yandex.count += 1;
+      chrome.storage.local.set({'popupState': result});
+    });
 
-    //   chrome.storage.local.set({storageKey: result});
-    // });
-
-    console.log("chrome onMessage");
+    //console.log(result.popupState.contentState[request.website].count);
   }
 });
 
