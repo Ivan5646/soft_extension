@@ -3,7 +3,6 @@ var processRemoteData = function processRemoteData(popupState) {
   let found = popupState.data.find(i => location.host.indexOf(i.domain) >= 0); // finding the required websites
   var website = found.domain;
   website = website.substring(0, website.indexOf(".")); // cut off domain zone 
-  console.log("afer aubstring: " + website);
   var closed = popupState.contentState[website].closed;
   var count = popupState.contentState[website].count;
   console.log(count);
@@ -41,19 +40,20 @@ var processRemoteData = function processRemoteData(popupState) {
     $(div).append(close);
   }
 
-  $(document).ready(function(){    
-    $("#close").click(function(){
+  $(document).ready(function() {    
+    $("#close").click(function() {
       $("#myContainer").hide();
-      chrome.storage.local.set({
-        popupState: {
-          contentState: {
-            website: {
-              closed: true
-            }
-          }
-        }
-      });
-      // chrome.extension.sendMessage({ msg: "closed" });
+      // chrome.storage.local.set({
+      //   // popupState: {
+      //   //   contentState: {
+      //   //     website: {
+      //   //       closed: true
+      //   //     }
+      //   //   }
+      //   // }
+      //   popupState.contentState[website].closed: true
+      // });
+      chrome.extension.sendMessage({ msg: "closed"});
     });  
   });
 

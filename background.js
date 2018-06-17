@@ -69,6 +69,17 @@ chrome.extension.onMessage.addListener((request, sender, sendResponse) => {
   if (request.msg === "refreshData") {
     requestData();
   }
+  else if (request.msg === "closed") {
+    // chrome.storage.local.get('storageKey', function(result) {
+    //   //data.visited will be in the result object for a specific key. You can change data.visited 
+    //   //to be true here. After changing it to true you can save it again under 
+    //   //the key 'storageKey' or any key you like.
+
+    //   chrome.storage.local.set({storageKey: result});
+    // });
+
+    console.log("chrome onMessage");
+  }
 });
 
 setInterval(requestData, REQUEST_INTERVAL);
