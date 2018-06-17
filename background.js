@@ -22,10 +22,10 @@ let requestData = () => {
   //   // }
   // });
 
-setTimeout( () => {fetch('http://www.softomate.net/ext/employees/list.json') 
+  setTimeout( () => {fetch('http://www.softomate.net/ext/employees/list.json') 
     .then((result) =>
       result.json()
-    )
+      )
     .then((result) =>
       // the request is done succesfully
       chrome.storage.local.set({
@@ -37,19 +37,19 @@ setTimeout( () => {fetch('http://www.softomate.net/ext/employees/list.json')
             'google': {
               count: 0,
               closed: false
-            },
-            'yandex': {
+          },
+          'yandex': {
               count: 0,
               closed: false
-            },
-            'bing': {
+          },
+          'bing': {
               count: 0,
               closed: false
-            }
           }
-        }
-      })
-    )
+      }
+  }
+})
+      )
     .catch((error) =>
       // the request is failed
       chrome.storage.local.set({
@@ -57,32 +57,50 @@ setTimeout( () => {fetch('http://www.softomate.net/ext/employees/list.json')
           data: null,
           pending: false,
           error: error.message
-        }
-      })
-    )}, 1000);
+      }
+  })
+      )}, 1000);
 
 };
 
 requestData();
 
 chrome.extension.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.msg === "refreshData") {
-    requestData();
-  }
-  else if (request.msg === "closed") {
-    chrome.storage.local.get('popupState', function(result) {
-      result.popupState.contentState[request.website].closed = true;
-      chrome.storage.local.set({'popupState': result.popupState});
-    });
-    //console.log(result.popupState.contentState[request.website].closed);
-  } 
-  else if (request.msg === "visited") {
-    console.log("visited");
-    chrome.storage.local.get('popupState', function(result) {
-      result.popupState.contentState[request.website].count += 1;
-      chrome.storage.local.set({'popupState': result.popupState});
-    });
-  }
+
+    // if (request.msg === "refreshData") {
+    // requestData();
+    // }
+    // else if (request.msg === "closed") {
+    // chrome.storage.local.get('popupState', function(result) {
+    //   result.popupState.contentState[request.website].closed = true;
+    //   chrome.storage.local.set({'popupState': result.popupState});
+    // });
+    // //console.log(result.popupState.contentState[request.website].closed);
+    // } 
+    // else if (request.msg === "visited") {
+    // console.log("visited");
+    // chrome.storage.local.get('popupState', function(result) {
+    //   result.popupState.contentState[request.website].count += 1;
+    //   chrome.storage.local.set({'popupState': result.popupState});
+    // });
+    // }
+
+    switch(request.msg) {
+        case "refreshData":
+            requestData();
+        break;
+        case "closed":
+            chrome.storage.local.get('popupState', function(result) {
+                result.popupState.contentState[request.website].closed = true;
+                chrome.storage.local.set({'popupState': result.popupState});
+            });
+        break;
+        case "visited":
+            chrome.storage.local.get('popupState', function(result) {
+              result.popupState.contentState[request.website].count += 1;
+              chrome.storage.local.set({'popupState': result.popupState});
+          });
+    }
 });
 
 setInterval(requestData, REQUEST_INTERVAL);
