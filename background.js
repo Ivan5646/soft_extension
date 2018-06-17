@@ -72,11 +72,17 @@ chrome.extension.onMessage.addListener((request, sender, sendResponse) => {
   else if (request.msg === "closed") {
     chrome.storage.local.get('popupState', function(result) {
       result.popupState.contentState[request.website].closed = true;
-      chrome.storage.local.set({'popupState': result});
+      chrome.storage.local.set({'popupState': result.popupState});
     });
-
     //console.log(result.popupState.contentState[request.website].closed);
-  }
+  } 
+  // else if (request.msg === "visited") {
+  //   console.log("visited");
+  //   chrome.storage.local.get('popupState', function(result) {
+  //     result.popupState.contentState[request.website].count += 1;
+  //     chrome.storage.local.set({'popupState': result});
+  //   });
+  // }
 });
 
 setInterval(requestData, REQUEST_INTERVAL);
