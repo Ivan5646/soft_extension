@@ -72,7 +72,7 @@ chrome.extension.onMessage.addListener((request, sender, sendResponse) => {
   else if (request.msg === "closed") {
     // Error in event handler for runtime.onMessage: ReferenceError: result is not defined
     chrome.storage.local.get('popupState', function(result) {
-      result.popupState.contentState.yandex.count += 1;
+      result.popupState.contentState.yandex.closed = true;
       chrome.storage.local.set({'popupState': result});
     });
 
