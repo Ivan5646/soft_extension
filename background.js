@@ -2,25 +2,25 @@ let REQUEST_INTERVAL = 3600000;
 
 let requestData = () => {
   // the request is started
-  chrome.storage.local.set({
-    popupState: {
-      pending: true
-    }//, 
-    // contentState: {
-    //   'google': {
-    //     count: 0,
-    //     closed: false
-    //   },
-    //   'yandex': {
-    //     count: 0,
-    //     closed: false
-    //   },
-    //   'bing': {
-    //     count: 0,
-    //     closed: false
-    //   }
-    // }
-  });
+  // chrome.storage.local.set({
+  //   popupState: {
+  //     pending: true
+  //   }//, 
+  //   // contentState: {
+  //   //   'google': {
+  //   //     count: 0,
+  //   //     closed: false
+  //   //   },
+  //   //   'yandex': {
+  //   //     count: 0,
+  //   //     closed: false
+  //   //   },
+  //   //   'bing': {
+  //   //     count: 0,
+  //   //     closed: false
+  //   //   }
+  //   // }
+  // });
 
 setTimeout( () => {fetch('http://www.softomate.net/ext/employees/list.json') 
     .then((result) =>
