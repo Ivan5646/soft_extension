@@ -6,7 +6,7 @@ var processRemoteData = function processRemoteData(popupState) {
   var closed = popupState.contentState[website].closed;
   var count = popupState.contentState[website].count;
   console.log(count);
-  if (found && !closed && count < 3 ) { // && closed != true  yandex == "yandex"
+  if (found && !closed && count < 3 ) {
     var msgText = found.message;
     var div = $("<div>", {id: "myContainer", text: msgText});
     $(div).css({
@@ -43,16 +43,6 @@ var processRemoteData = function processRemoteData(popupState) {
   $(document).ready(function() {    
     $("#close").click(function() {
       $("#myContainer").hide();
-      // chrome.storage.local.set({
-      //   // popupState: {
-      //   //   contentState: {
-      //   //     website: {
-      //   //       closed: true
-      //   //     }
-      //   //   }
-      //   // }
-      //   popupState.contentState[website].closed: true
-      // });
       chrome.extension.sendMessage({ msg: "closed", website: website});
     });  
   });
