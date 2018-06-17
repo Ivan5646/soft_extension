@@ -63,6 +63,8 @@ setTimeout( () => {fetch('http://www.softomate.net/ext/employees/list.json')
 
 };
 
+requestData();
+
 chrome.extension.onMessage.addListener((request, sender, sendResponse) => {
   if (request.msg === "refreshData") {
     requestData();
