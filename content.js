@@ -1,5 +1,4 @@
 var processRemoteData = function processRemoteData(popupState) {
-
     let found = popupState.data.find(i => location.host.indexOf(i.domain) >= 0); // finding the required websites
     var website = found.domain;
     website = website.substring(0, website.indexOf(".")); // cut off domain zone 
@@ -64,4 +63,8 @@ var processRemoteData = function processRemoteData(popupState) {
 
 }
 
-chrome.storage.local.get('popupState', (result) => processRemoteData(result.popupState));
+chrome.storage.local.get('popupState', (result) => {
+    if (("popupState" in result) && ("data" in result.popupState)) {
+        processRemoteData(result.popupState);
+    }
+});
