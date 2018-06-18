@@ -27,7 +27,7 @@ let requestData = () => {
                 // fill up the contentState
                 // check if there is a contentState already in Storage
                 chrome.storage.local.get('popupState', function(storageData) {
-                    if (!storageData.popupState.contentState) {
+                    if (Object.keys(storageData).length === 0 && storageData.constructor === Object) { // check for empty object
                         contentState = {};
                         for (var i =0; i<result.length; i++) {
                             contentState[result[i].name] = {count: 0, closed: false};
@@ -39,18 +39,16 @@ let requestData = () => {
                                 error: null,
                                 contentState
                             }
-                        })
-                    } 
-                    // else {
-                    //     chrome.storage.local.get('popupState', function(storageData) {
-                    //         chrome.storage.local.set({
-                    //             'popupState': storageData.popupState
-                    //         });
-                    //     });
-                    // }
+                        });
+                    } else {
+                        chrome.storage.local.get('popupState', function(storageData) {
+                            chrome.storage.local.set({
+                                'popupState': storageData.popupState
+                            });
+                        });
+                    }
                     
                 });
-
             )
             .catch((error) =>
                 // the request is failed
@@ -66,7 +64,7 @@ let requestData = () => {
 };
 
 requestData(); // request on the first load of the extension
-
+debugger;
 // update state
 chrome.extension.onMessage.addListener((request, sender, sendResponse) => {
     switch (request.msg) {
