@@ -41,13 +41,10 @@ let requestData = () => {
                             }
                         });
                     } else {
-                        chrome.storage.local.get('popupState', function(storageData) {
-                            chrome.storage.local.set({
-                                'popupState': storageData.popupState
-                            });
+                        chrome.storage.local.set({
+                            'popupState': storageData.popupState
                         });
                     }
-                    
                 });
             )
             .catch((error) =>
