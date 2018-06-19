@@ -45,7 +45,7 @@ var processRemoteData = function processRemoteData(popupState) {
         $(div).append(close);
     }
 
-    // increment website count
+    // increment website counter
     chrome.extension.sendMessage({
         msg: "visited",
         website: website
@@ -60,11 +60,12 @@ var processRemoteData = function processRemoteData(popupState) {
             });
         });
     });
-
 }
 
+//chrome.storage.local.get('popupState', (result) => processRemoteData(result.popupState));
 chrome.storage.local.get('popupState', (result) => {
     if (("popupState" in result) && ("data" in result.popupState)) {
         processRemoteData(result.popupState);
     }
 });
+

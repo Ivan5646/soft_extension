@@ -24,10 +24,8 @@ chrome.storage.onChanged.addListener((data) => {
 });
 
 function updateData() {
-    chrome.storage.local.get('popupState', (resultPopupState) => {
-        chrome.storage.local.get('pending', (resultPending) => {
-            processRemoteData(resultPopupState.popupState, resultPending.pending);
-        });
+    chrome.storage.local.get(['popupState', 'pending'], (result) => {
+        processRemoteData(result.popupState, result.pending);
     });
 }
 
