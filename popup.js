@@ -14,7 +14,7 @@ var processRemoteData = function processRemoteData(popupState, pending) {
         // $('#status').append(links);
 
         for (i = 0; i < popupState.data.length; i++) {
-            $(`<a class="links" href=${popupState.data[i].domain} />`).text(popupState.data[i].name).appendTo('#status');
+            $(`<a class="links" href=https://www.${popupState.data[i].domain} />`).text(popupState.data[i].name).appendTo('#status');
         }
     }
 };
