@@ -9,9 +9,13 @@ var processRemoteData = function processRemoteData(popupState, pending) {
         $('#errorText').text('');
         $('#error').hide();
         $('#pending').hide();
-        let text = '';
-        popupState.data.forEach((item) => text += item.name + ' ');
-        $('#status').text(text);
+        let links = '';
+        // popupState.data.forEach((item) => {links += "link"});
+        // $('#status').append(links);
+
+        for (i = 0; i < popupState.data.length; i++) {
+            $(`<a class="links" href=${popupState.data[i].domain} />`).text(popupState.data[i].name).appendTo('#status');
+        }
     }
 };
 
