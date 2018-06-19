@@ -28,3 +28,9 @@
     position: absolute;
     bottom: 6px;
 }
+
+#status {
+    display: flex;
+    flex-direction: column;
+    
+}
