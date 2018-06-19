@@ -1,6 +1,7 @@
 var processRemoteData = function processRemoteData(popupState, pending) {
     if (pending) {
         $('#pending').show();
+        $('#status').text("");
     } else if (popupState.error) {
         $('#error').show();
         $('#errorText').text(popupState.error);
