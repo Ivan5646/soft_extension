@@ -1,3 +1,7 @@
+body {
+    background-color: #f2f2f2;
+}
+
 .main {
     display: flex;
     flex-direction: column;
@@ -37,13 +41,12 @@
     align-self: flex-end;
     margin: 20px auto 0 auto;
     cursor: pointer;
-
     border-radius: 3px;
     border: 1px solid #a3baa0;
-    /*padding: 15px 0;*/
+    padding: 2px 8px;
     color: white;
     text-decoration: none;
-    font-size: 12px;
+    font-size: 14px;
     background: #b1e268;
     background: -moz-linear-gradient(top, #b1e268 0%, #93d552 40%, #72cd36 100%);
     background: -webkit-linear-gradient(top, #b1e268 0%,#93d552 40%,#72cd36 100%);
@@ -62,6 +65,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
+}
+
+#status a {
+    margin-bottom: 4px;
 }
 
 .links {
