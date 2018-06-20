@@ -35,19 +35,17 @@ let requestData = () => {
                         .filter(browser => !result.find(item => item.name === browser))
                         .forEach(browserForRemove => delete contentState[browserForRemove]);
                 }
-                setTimeout(() => {
-                    chrome.storage.local.set({
-                        'popupState': {
-                            data: result,
-                            error: null,
-                            contentState
-                        }
-                    });
+                chrome.storage.local.set({
+                    'popupState': {
+                        data: result,
+                        error: null,
+                        contentState
+                    }
+                });
 
-                    chrome.storage.local.set({
-                        pending: false,
-                    });
-                }, 1000);
+                chrome.storage.local.set({
+                    pending: false,
+                });
             });
         })
         .catch((error) =>{
