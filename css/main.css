@@ -36,6 +36,25 @@
 #refreshButton {
     align-self: flex-end;
     margin: 20px auto 0 auto;
+    cursor: pointer;
+
+    border-radius: 3px;
+    border: 1px solid #a3baa0;
+    /*padding: 15px 0;*/
+    color: white;
+    text-decoration: none;
+    font-size: 12px;
+    background: #b1e268;
+    background: -moz-linear-gradient(top, #b1e268 0%, #93d552 40%, #72cd36 100%);
+    background: -webkit-linear-gradient(top, #b1e268 0%,#93d552 40%,#72cd36 100%);
+    background: linear-gradient(to bottom, #b1e268 0%,#93d552 40%,#72cd36 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b1e268', endColorstr='#72cd36',GradientType=0 );
+}
+#refreshButton:hover {
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);   
+}
+#refreshButton:focus {
+    outline:0;
 }
 
 #status {
