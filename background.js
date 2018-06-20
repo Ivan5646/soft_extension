@@ -41,9 +41,6 @@ let requestData = () => {
                     contentState = storageData.popupState.contentState;
                     // add new websites
                     for (var i =0; i<result.length; i++) {
-                        console.log(storageData);
-                        console.log(contentState);
-                        console.log(result[i].name);
                         if (!(result[i].name in contentState)) {
                             contentState[result[i].name] = {count: 0, closed: false};                            
                         }
@@ -84,8 +81,6 @@ let requestData = () => {
         })
 };
 
-console.log("bg 2");
-
 requestData(); // request on the first load of the extension
 
 // update state
@@ -104,10 +99,7 @@ chrome.extension.onMessage.addListener((request, sender, sendResponse) => {
             break;
         case "visited":
             chrome.storage.local.get('popupState', function(result) {
-                console.log("visited");
-                console.log(result.popupState);
                 result.popupState.contentState[request.website].count += 1;
-                console.log("-----");
                 chrome.storage.local.set({
                     'popupState': result.popupState
                 });
@@ -116,44 +108,10 @@ chrome.extension.onMessage.addListener((request, sender, sendResponse) => {
 });
 
 // reset website counters after browser was closed
-// window.onbeforeunload = function() {
-//     chrome.storage.local.get('popupState', function(result) {
-//     for (var key in result.popupState.contentState) {
-//       result.popupState.contentState[key].count = 0;
-//       console.log(result.popupState.contentState[key].count);
-//     }
-//         chrome.storage.local.set({
-//             'popupState': result.popupState
-//         });
-//     });
-// };
-
-// chrome.app.window.current().onClosed.addListener(function(){  // chrome.app.window undefined
-//     chrome.storage.local.get('popupState', function(result) {
-//         for (var key in result.popupState.contentState) {
-//           result.popupState.contentState[key].count = 0;
-//           console.log(result.popupState.contentState[key].count);
-//       }
-//       chrome.storage.local.set({
-//         'popupState': result.popupState
-//     });
-//   });
-// })
-
-// chrome.app.runtime.onLaunched.addListener(function() {
-//     console.log('launched');
-//     function(window){
-//     window.onClosed.addListener(function() {
-//     console.log('close bg');
-//     });
-//     }
-// })
-
 chrome.windows.onRemoved.addListener(function(){
     chrome.storage.local.get('popupState', function(result) {
         for (var key in result.popupState.contentState) {
           result.popupState.contentState[key].count = 0;
-          console.log(result.popupState.contentState[key].count);
       }
       chrome.storage.local.set({
         'popupState': result.popupState

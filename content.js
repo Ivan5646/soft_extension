@@ -13,7 +13,7 @@ var processRemoteData = function processRemoteData(popupState) {
         });
         $(div).css({
             "font-size": "28px",
-            "position": "absolute",
+            "position": "fixed",
             "top": "20px",
             "z-index": "99999",
             "padding": "20px",
@@ -28,12 +28,12 @@ var processRemoteData = function processRemoteData(popupState) {
 
         var close = $("<span>", {
             id: "close",
-            text: "X"
+            text: "x"
         });
         $(close).css({
             "position": "relative",
-            "top": "2px",
-            "right": "2px",
+            "top": "-25px",
+            "right": "-12px",
             "cursor": "pointer",
             "margin-left": "15px",
             "color": "white",

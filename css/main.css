@@ -1,26 +1,28 @@
-/* body {
-    overflow: scroll;
-    height: 200px;
-    width: 66px;
-}*/
-
 .main {
-/*    height: 200px;
-    width: 66px;*/
     display: flex;
     flex-direction: column;
 }
 
-#pending {
+.websites {
+    min-height: 120px;
+    text-align: center;
+    margin: 0 auto;
+/*    display: flex;
+    flex-direction: column;*/
+}
+
+.websites__pending {
     background-image: url("../img/preloader.gif");
     margin-bottom: 2px;
-    /*background-size: 50%;*/
     background-position: center;
+/*    align-self: center;*/
 }
 
 #error {
+    margin: 0 auto;
     background-image: url("../img/error.png");
     background-size: 100%;
+    background-position: center;
 }
 
 #pending,
@@ -32,10 +34,8 @@
 }
 
 #refreshButton {
-/*    position: absolute;
-    bottom: 6px;*/
     align-self: flex-end;
-    margin-top: 20px;
+    margin: 20px auto 0 auto;
 }
 
 #status {

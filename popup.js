@@ -16,7 +16,7 @@ var processRemoteData = function processRemoteData(popupState, pending) {
     }
 };
 
-updateData();
+updateData(); // on the first load...
 
 chrome.storage.onChanged.addListener((data) => {
     if ("pending" in data || "popupState" in data) {
