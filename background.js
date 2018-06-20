@@ -1,20 +1,5 @@
 let REQUEST_INTERVAL = 3600000;
 
-// contentState: {
-//     'google': {
-//         count: 0,
-//         closed: false
-//     },
-//     'yandex': {
-//         count: 0,
-//         closed: false
-//     },
-//     'bing': {
-//         count: 0,
-//         closed: false
-//     }
-// }
-
 let requestData = () => {
     // initial state
 
